@@ -45,7 +45,7 @@ _name_ is simply the name given to the device.  This name can be used in queries
 
 _module_ is the name of the npm module. The module is expected to exist in this directory under the _node_modules_ directory.  If the module is not strictly an npm module, it must still be found under the node_modules directory.
 
-_options_ is an object within the device config object which defines all other operational parameters.  In general, any parameters may be defined in this options object, and most modules will have many several.  The three which are a part of every Lynxari device are 'devicePoll', 'streamPeriod', and 'deltaPercent'. The si1145 options also can define the bus device file.  Finally, all parameter values can have a range defined by specifying '<parameter>\_range'.
+_options_ is an object within the device config object which defines all other operational parameters.  In general, any parameters may be defined in this options object, and most modules will have many several.  The three which are a part of every Lynxari device are 'devicePoll', 'streamPeriod', and 'deltaPercent'. The si1145 options also can define the bus number.  Finally, all parameter values can have a range defined by specifying '<parameter>\_range'.
 
 ```
 "devicePoll":<period>
@@ -57,8 +57,8 @@ Period in milliseconds for broadcast of streaming values
 "deltaPercent":<percent>
 Percent of the data range which must be exceeded (delta) to qualify as "new" data
 
-"bus":<linux bus device>
-Linux filesystem device for hardware bus, i.e. /dev/i2c-1
+"bus":<i2c bus number>
+Linux filesystem device for hardware bus, i.e. 1
 ```
 #### devicePoll and streamPeriod
 _devicePoll_ is given in milliseconds, and defines how often the device will be polled for new values.  This paramter is primary useful in sensors which sit idle waiting to be polled, and not for devices which supply values on their own schedule (i.e. for pull ranther that push).
@@ -89,7 +89,7 @@ Here is an example of an 'config.json' file which streams values every 10 second
     "streamPeriod":10000, 
     "devicePoll":1000, 
     "deltaPercent":8,
-    "bus":"/dev/i2c-1",
+    "bus":1,
     "ir_range":20000,
     "visible_range":20000
     "uv_range":11
@@ -102,7 +102,7 @@ If not specified in the config object, the program uses the following default va
 * _streamPeriod_ : 10000 (10,000ms or 10 seconds)
 * _devicePoll_ : 1000 (1,000ms or 1 second)
 * _deltaPercent_ : 5 (polled values must exceed the range by &plusmn; 5%)
-* _bus_ : /dev/i2c-1 (I2C bus 1)
+* _bus_ : 1 (I2C bus /dev/i2c-1)
 
   
 
